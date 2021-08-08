@@ -36,9 +36,14 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'AutoClose'
+Plugin 'phanviet/vim-monokai-pro'
 call vundle#end()
-colorscheme jellybeans
-""colorscheme monokai_pro 
+""colorscheme jellybeans
+set termguicolors
+colorscheme monokai_pro
+let g:lightline = {
+      \ 'colorscheme': 'monokai_pro',
+      \ }
 
 map <F1> :tabnew<cr>
 map <F3> :NERDTreeToggle<cr>
