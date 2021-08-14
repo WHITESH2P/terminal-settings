@@ -4,8 +4,8 @@
 set number                            " 행번호 표시, set nu 도 가능
 set expandtab                         " 탭대신 스페이스
 set smarttab                          " 스페이스로 된 탭을 한번에 지움
-set tabstop=2                         " 탭을 4칸으로
-set shiftwidth=2                      " 자동 들여쓰기 4칸
+set tabstop=4                         " 탭을 4칸으로
+set shiftwidth=4                      " 자동 들여쓰기 4칸
 filetype indent on                    " 파일 종류에 따라 탭간격조정
 filetype plugin on                    " 파일 종류에 따라 탭간격조정
 if has("syntax")
@@ -154,6 +154,7 @@ map <S-F9> <Esc>:NERDTree<CR>
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard'] "Ignore in .gitignore
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_show_hidden = 1
 
 """"""""""""""""""""""""""""
 """"" Tagbar Settings  """""
