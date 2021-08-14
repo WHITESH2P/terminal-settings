@@ -40,6 +40,7 @@ set noshowmode                        " status를 표시하지 않음
 set cursorline                        " cursor line을 강조
 set showtabline=2                     " 항상 탭 라인 표시
 set background=dark                   " 배경색 lihgt / dark
+set t_Co=256
 if (has("termguicolors"))             " 풀컬러 지원
   set termguicolors
 endif
@@ -47,32 +48,48 @@ set splitbelow                        " 화면 분할 시 아래에 생성
 set splitright                        " 화면 분할 시 오른쪽에 생성
 set langmap=ㅁa,ㅠb,ㅊc,ㅇd,ㄷe,ㄹf,ㅎg,ㅗh,ㅑi,ㅓj,ㅏk,ㅣl,ㅡm,ㅜn,ㅐo,ㅔp,ㅂq,ㄱr,ㄴs,ㅅt,ㅕu,ㅍv,ㅈw,ㅌx,ㅛy,ㅋz
 
-"""""""""""""""""""""""""
-""""" Vundle Plugin """""
-"""""""""""""""""""""""""
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-  Plugin 'VundleVim/Vundle.vim'
-  Plugin 'scrooloose/nerdtree'
-  Plugin 'nanotech/jellybeans.vim'
-  Plugin 'mhinz/vim-startify'
-  Plugin 'itchyny/lightline.vim'
-  Plugin 'mengelbrecht/lightline-bufferline'
-  Plugin 'airblade/vim-gitgutter'
-  Plugin 'Xuyuanp/nerdtree-git-plugin'
-  Plugin 'tpope/vim-fugitive'
-  Plugin 'scrooloose/nerdcommenter'
-  Plugin 'majutsushi/tagbar'
-  Plugin 'ludovicchabant/vim-gutentags'
-  Plugin 'kien/ctrlp.vim'
-  "Plugin 'phanviet/vim-monokai-pro'
-  "Plugin 'valloric/youcompleteme'
-  "Plugin 'scrooloose/syntastic'
-call vundle#end()
+"""""""""""""""""""""
+""""" Plug list """""
+"""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
+  Plug 'scrooloose/nerdtree'
+  Plug 'mhinz/vim-startify'
+  Plug 'itchyny/lightline.vim'
+  Plug 'mengelbrecht/lightline-bufferline'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'tpope/vim-fugitive'
+  Plug 'scrooloose/nerdcommenter'
+  Plug 'majutsushi/tagbar'
+  Plug 'ludovicchabant/vim-gutentags'
+  Plug 'kien/ctrlp.vim'
+  "Plug 'valloric/youcompleteme'
+  "Plug 'scrooloose/syntastic'
 
-colorscheme jellybeans
-"colorscheme monokai_pro
+  """""""""""""""""""""""""""
+  """"" vim colorscheme """""
+  """""""""""""""""""""""""""
+  Plug 'morhetz/gruvbox'
+  "Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+  "Plug 'gosukiwi/vim-atom-dark'
+  "Plug 'nanotech/jellybeans.vim'
+  "Plug 'tomasr/molokai'
+call plug#end()
 
+"""""""""""""""""""""""""""
+""""" vim colorscheme """""
+"""""""""""""""""""""""""""
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_invert_signs = 1
+colorscheme gruvbox
+highlight! link SignColumn LineNr
+"let g:material_theme_style = 'darker'
+"let g:material_terminal_italics = 0
+"colorscheme material
+"colorscheme atom-dark-256
+"colorscheme jellybeans
+"colorscheme molokai
+"
 " TO-DO
 " youcompleteme
 " syntastic
@@ -89,7 +106,7 @@ let g:NERDToggleCheckAllLines = 1     " Enable NERDCommenterToggle to check all 
 """"" lightline 관련 설정 """""
 """""""""""""""""""""""""""""""
 let g:lightline = {
-  \ 'colorscheme': 'jellybeans',
+  \ 'colorscheme': 'gruvbox',
   \ 'active': {
   \   'left': [ ['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified'] ]
   \ },
@@ -188,10 +205,10 @@ function! VTerm(...)
   endif
 endfunction
 
-command Hnw           set number! list! cursorline!
-command Snw           set number list cursorline
-command -nargs=1 Vis  :source <args> <bar> source ~/.vimrc
-command VSLoad        :SLoad <bar> source ~/.vimrc
-command -nargs=? Term call Term(<f-args>)
+command Hnw            set number! list! cursorline!
+command Snw            set number list cursorline
+command VSLoad         :SLoad <bar> source ~/.vimrc
+command -nargs=1 Vis   :source <args> <bar> source ~/.vimrc
+command -nargs=? Term  call Term(<f-args>)
 command -nargs=? VTerm call VTerm(<f-args>)
 
