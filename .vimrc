@@ -18,7 +18,7 @@ set ignorecase                        " 검색시 대소문자 무시
 set smartcase                         " 검색어에 대문자가 포함되어 있으면 대소문자 무시하지 않음
 set list listchars=tab:»\ ,trail:·
 set laststatus=2                      " 상태바 표시를 항상한다
-set fileencodings=utf-8,euc-kr        " 파일저장인코딩
+set fileencodings=utf-8               " 파일저장인코딩
 set termencoding=utf-8                " 터미널 인코딩
 set wrap                              " 줄이 길어도 다음 줄로 넘기지 않음
 set linebreak                         " 한 줄을 여러 줄로 표현할 때 단어 단위로 라인이 잘림
