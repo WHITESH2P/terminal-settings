@@ -6,8 +6,7 @@ set expandtab                                    " 탭대신 스페이스
 set smarttab                                     " 스페이스로 된 탭을 한번에 지움
 set tabstop=4                                    " 탭을 4칸으로
 set shiftwidth=4                                 " 자동 들여쓰기 4칸
-filetype indent on                               " 파일 종류에 따라 탭간격조정
-filetype plugin on                               " 파일 종류에 따라 탭간격조정
+filetype indent plugin on                        " 파일 종류에 따라 탭간격조정
 if has("syntax")
   syntax on                                      " 문법 on
 endif
@@ -39,15 +38,10 @@ set noswapfile                                   " swp 파일을 만들지 않�
 set noshowmode                                   " status를 표시하지 않음
 set cursorline                                   " cursor line을 강조
 set showtabline=2                                " 항상 탭 라인 표시
-set background=dark                              " 배경색 lihgt / dark
-set t_Co=256
-if (has("termguicolors"))                        " 풀컬러 지원
-  set termguicolors
-endif
 set splitbelow                                   " 화면 분할 시 아래에 생성
 set splitright                                   " 화면 분할 시 오른쪽에 생성
-set langmap=ㅁa,ㅠb,ㅊc,ㅇd,ㄷe,ㄹf,ㅎg,ㅗh,ㅑi,ㅓj,ㅏk,ㅣl,ㅡm,ㅜn,ㅐo,ㅔp,ㅂq,ㄱr,ㄴs,ㅅt,ㅕu,ㅍv,ㅈw,ㅌx,ㅛy,ㅋz
 set updatetime=100                               " 업데이트 시간 100ms
+set langmap=ㅁa,ㅠb,ㅊc,ㅇd,ㄷe,ㄹf,ㅎg,ㅗh,ㅑi,ㅓj,ㅏk,ㅣl,ㅡm,ㅜn,ㅐo,ㅔp,ㅂq,ㄱr,ㄴs,ㅅt,ㅕu,ㅍv,ㅈw,ㅌx,ㅛy,ㅋz
 
 """""""""""""""""""""
 """"" Plug list """""
@@ -71,8 +65,15 @@ call plug#end()
 """""""""""""""""""""""""""
 """"" vim colorscheme """""
 """""""""""""""""""""""""""
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_invert_signs = 1
+set background=dark                              " 배경색 lihgt / dark
+set t_Co=256
+if (has("termguicolors"))                        " 풀컬러 지원
+  set termguicolors
+endif
+
+let g:gruvbox_contrast_dark  = 'hard'
+let g:gruvbox_contrast_light = 'medium'
+let g:gruvbox_invert_signs   = 1
 colorscheme gruvbox
 highlight! link SignColumn LineNr
 
@@ -83,9 +84,9 @@ highlight! link SignColumn LineNr
 """""""""""""""""""""""""""""""""""
 """"" NERD Commenter Settings """""
 """""""""""""""""""""""""""""""""""
-let g:NERDCompactSexyComs = 1
-let g:NERDDefaultAlign = 'left'
-let g:NERDCommentEmptyLines = 1
+let g:NERDCompactSexyComs     = 1
+let g:NERDDefaultAlign        = 'left'
+let g:NERDCommentEmptyLines   = 1
 let g:NERDToggleCheckAllLines = 1
 
 """""""""""""""""""""""""""""""
@@ -155,9 +156,9 @@ map <S-F9> <Esc>:NERDTree<CR>
 """"" CtrlP Settings """""
 """"""""""""""""""""""""""
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_user_command = [ 'git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard' ]
+let g:ctrlp_user_command  = [ 'git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard' ]
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_show_hidden = 1
+let g:ctrlp_show_hidden   = 1
 
 """"""""""""""""""""""""""""
 """"" Tagbar Settings  """""
@@ -165,12 +166,16 @@ let g:ctrlp_show_hidden = 1
 nmap <F8> :TagbarToggle<CR>
 
 """""""""""""""""""""""""""""
-""""" split navigations """""
+""""" Split navigations """""
 """""""""""""""""""""""""""""
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J>     <C-W><C-J>
+nnoremap <C-K>     <C-W><C-K>
+nnoremap <C-L>     <C-W><C-L>
+nnoremap <C-H>     <C-W><C-H>
+nnoremap <C-LEFT>  <C-W><C-H>
+nnoremap <C-RIGHT> <C-W><C-L>
+nnoremap <C-UP>    <C-W><C-K>
+nnoremap <C-DOWN>  <C-W><C-J>
 
 """"""""""""""""""""""""""""""
 """"" 사용자 명령어 설정 """""
