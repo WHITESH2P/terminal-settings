@@ -77,10 +77,6 @@ let g:gruvbox_invert_signs   = 1
 colorscheme gruvbox
 highlight! link SignColumn LineNr
 
-" TO-DO
-" youcompleteme
-" syntastic
-
 """""""""""""""""""""""""""""""""""
 """"" NERD Commenter Settings """""
 """""""""""""""""""""""""""""""""""
