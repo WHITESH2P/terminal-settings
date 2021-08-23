@@ -54,12 +54,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-fugitive'
   Plug 'scrooloose/nerdcommenter'
-  Plug 'majutsushi/tagbar'
-  Plug 'ludovicchabant/vim-gutentags'
   Plug 'kien/ctrlp.vim'
   Plug 'morhetz/gruvbox'
-  "Plug 'valloric/youcompleteme'
-  "Plug 'scrooloose/syntastic'
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 """""""""""""""""""""""""""
@@ -137,13 +135,15 @@ nmap <Leader>c8 <Plug>lightline#bufferline#delete(8)
 nmap <Leader>c9 <Plug>lightline#bufferline#delete(9)
 nmap <Leader>c0 <Plug>lightline#bufferline#delete(10)
 
-nmap <Leader>t  :enew<CR>
-nmap <Leader>bq :bp <BAR> bd #<CR>
+nmap <Leader>t    :enew<CR>
+nmap <Leader>bq   :bp <BAR> bd #<CR>
+noremap <A-Left>  :tabmove -1<cr>
+noremap <A-Right> :tabmove +1<cr>
 
 """"""""""""""""""""""""""""""
 """"" NERDTree 관련 설정 """""
 """"""""""""""""""""""""""""""
-let NERDTreeShowHidden=1
+"let NERDTreeShowHidden=1
 map <F9>   <Esc>:NERDTreeToggle<CR>
 map <C-F9> <Esc>:NERDTreeFocus<CR>
 map <S-F9> <Esc>:NERDTree<CR>
@@ -156,26 +156,83 @@ let g:ctrlp_user_command  = [ 'git/', 'git --git-dir=%s/.git ls-files -oc --excl
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_show_hidden   = 1
 
-""""""""""""""""""""""""""""
-""""" Tagbar Settings  """""
-""""""""""""""""""""""""""""
-nmap <F8> :TagbarToggle<CR>
-
-"""""""""""""""""""""""""""""
-""""" Split navigations """""
-"""""""""""""""""""""""""""""
-nnoremap <C-J>     <C-W><C-J>
-nnoremap <C-K>     <C-W><C-K>
-nnoremap <C-L>     <C-W><C-L>
-nnoremap <C-H>     <C-W><C-H>
-nnoremap <C-LEFT>  <C-W><C-H>
-nnoremap <C-RIGHT> <C-W><C-L>
-nnoremap <C-UP>    <C-W><C-K>
-nnoremap <C-DOWN>  <C-W><C-J>
-
 """"""""""""""""""""""""""""""
-""""" 사용자 명령어 설정 """""
+""""" gitgutter Settings """""
 """"""""""""""""""""""""""""""
+let g:gitgutter_sign_column_always = 1
+
+""""""""""""""""""""""""
+""""" CoC Settings """""
+""""""""""""""""""""""""
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Give more space for displaying messages.
+set cmdheight=1
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-@> coc#refresh()
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+"""""""""""""""""""""""""""""""""
+""""" User Command Settings """""
+"""""""""""""""""""""""""""""""""
 function! Term(...)
   if a:0 == 0
     term ++rows=10
