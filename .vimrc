@@ -69,7 +69,7 @@ if (has("termguicolors"))                        " 풀컬러 지원
   set termguicolors
 endif
 
-let g:gruvbox_contrast_dark  = 'hard'
+let g:gruvbox_contrast_dark  = 'medium'
 let g:gruvbox_contrast_light = 'medium'
 let g:gruvbox_invert_signs   = 1
 colorscheme gruvbox
@@ -134,6 +134,9 @@ nmap <Leader>c7 <Plug>lightline#bufferline#delete(7)
 nmap <Leader>c8 <Plug>lightline#bufferline#delete(8)
 nmap <Leader>c9 <Plug>lightline#bufferline#delete(9)
 nmap <Leader>c0 <Plug>lightline#bufferline#delete(10)
+
+nmap <Leader>- :bprev<CR>
+nmap <Leader>= :bnext<CR>
 
 nmap <Leader>t    :enew<CR>
 nmap <Leader>bq   :bp <BAR> bd #<CR>
