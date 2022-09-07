@@ -71,7 +71,11 @@ endif
 let g:gruvbox_contrast_dark  = 'medium'
 let g:gruvbox_contrast_light = 'medium'
 let g:gruvbox_invert_signs   = 1
-colorscheme gruvbox
+try
+  colorscheme gruvbox
+catch
+  colorscheme evening
+endtry
 highlight! link SignColumn LineNr
 
 """""""""""""""""""""""""""""""""""
