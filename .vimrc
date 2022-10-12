@@ -193,3 +193,10 @@ command -nargs=1 Vis   :source <args> <bar> source ~/.vimrc
 command -nargs=? Term  call Term(<f-args>)
 command -nargs=? VTerm call VTerm(<f-args>)
 
+" Verilog & Systemverilog Syntax
+au BufNewFile,BufRead *.v set ft=verilog
+au BufNewFile,BufRead *.sv set ft=systemverilog
+au BufNewFile,BufRead *.v,*.sv so ~/.vim/syntax/verilog_systemverilog.vim
+au BufNewFile,BufRead *.v,*.sv so ~/.vim/indent/verilog_systemverilog.vim
+au BufNewFile,BufRead *.v,*.sv so ~/.vim/ftdetect/verilog_systemverilog.vim
+
